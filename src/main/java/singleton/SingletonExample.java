@@ -7,8 +7,13 @@ public class SingletonExample {
     }
 
     public synchronized static SingletonExample getInstance() {
+
         if (INSTANCE == null) {
-            INSTANCE = new SingletonExample();
+            synchronized (SingletonExample.class) {
+                if(INSTANCE==null){
+                    INSTANCE = new SingletonExample();
+                }
+            }
         }
         return INSTANCE;
     }
